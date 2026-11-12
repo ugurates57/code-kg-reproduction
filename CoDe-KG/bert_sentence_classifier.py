@@ -1,24 +1,26 @@
 # bert_sentence_classifier.py
 import os
 from dataclasses import dataclass
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
 import pandas as pd
 import torch
 from transformers import (
-    AutoTokenizer,
     AutoModelForSequenceClassification,
-    TrainingArguments,
-    Trainer,
+    AutoTokenizer,
     DataCollatorWithPadding,
+    Trainer,
+    TrainingArguments,
 )
+
 
 @dataclass
 class BertClassifierConfig:
     model_name: str = "bert-large-uncased"
-    num_labels: int = 5  # Simple, Compound, Complex, Compound-Complex
+    num_labels: int = 5
     out_dir: str = "models/bert_sentence_classifier"
-    max_length: int = 512
+    max_length: int = 256
+
 
 LABEL_MAP_DEFAULT = {
     "Simple Sentence": 0,
@@ -27,10 +29,22 @@ LABEL_MAP_DEFAULT = {
     "Compound-Complex Sentence": 3,
     "Incomplete Sentence": 4,
 }
-INV_LABEL_MAP_DEFAULT = {v: k for k, v in LABEL_MAP_DEFAULT.items()}
+
+INV_LABEL_MAP_DEFAULT = {
+    value: key for key, value in LABEL_MAP_DEFAULT.items()
+}
+
 
 class CSVDataset(torch.utils.data.Dataset):
-    def __init__(self, df: pd.DataFrame, tokenizer, text_col: str, label_col: str, label_map: Dict[str, int], max_length: int):
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        tokenizer,
+        text_col: str,
+        label_col: str,
+        label_map: Dict[str, int],
+        max_length: int,
+    ):
         self.df = df.reset_index(drop=True)
         self.tokenizer = tokenizer
         self.text_col = text_col
@@ -44,15 +58,15 @@ class CSVDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         text = str(self.df.loc[idx, self.text_col])
         label_str = str(self.df.loc[idx, self.label_col])
-        label = self.label_map[label_str]
 
         enc = self.tokenizer(
             text,
             truncation=True,
             max_length=self.max_length,
         )
-        enc["labels"] = label
+        enc["labels"] = self.label_map[label_str]
         return enc
+
 
 class BertSentenceClassifier:
     def __init__(self, cfg: BertClassifierConfig):
@@ -61,11 +75,21 @@ class BertSentenceClassifier:
         self.model = None
 
     def exists(self) -> bool:
-        return os.path.isdir(self.cfg.out_dir) and os.path.isfile(os.path.join(self.cfg.out_dir, "config.json"))
+        return (
+            os.path.isdir(self.cfg.out_dir)
+            and os.path.isfile(
+                os.path.join(self.cfg.out_dir, "config.json")
+            )
+        )
 
     def load(self) -> None:
-        self.tokenizer = AutoTokenizer.from_pretrained(self.cfg.out_dir)
-        self.model = AutoModelForSequenceClassification.from_pretrained(self.cfg.out_dir)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.cfg.out_dir,
+        )
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            self.cfg.out_dir,
+            attn_implementation="eager",
+        )
 
     def train_if_missing(
         self,
@@ -81,77 +105,79 @@ class BertSentenceClassifier:
             self.load()
             return
 
-        if train_csv is None:
-            raise ValueError("No finetuned BERT found and --bert_train_csv was not provided.")
-
-        try:
-            df = pd.read_csv(train_csv, encoding="utf-8")
-        except UnicodeDecodeError:
-            try:
-                df = pd.read_csv(train_csv, encoding="utf-8-sig")
-            except UnicodeDecodeError:
-                df = pd.read_csv(train_csv, encoding="latin-1")
-
-        self.tokenizer = AutoTokenizer.from_pretrained(self.cfg.model_name)
-        self.model = AutoModelForSequenceClassification.from_pretrained(
-            self.cfg.model_name,
-            num_labels=self.cfg.num_labels
+        # Use the dedicated script to preserve our training setup.
+        raise RuntimeError(
+            "No trained BERT classifier found at "
+            f"{self.cfg.out_dir}. "
+            "Run CoDe-KG/scripts/train_bert.py first, or provide "
+            "the correct model directory."
         )
-
-        ds = CSVDataset(df, self.tokenizer, text_col, label_col, label_map, self.cfg.max_length)
-        collator = DataCollatorWithPadding(tokenizer=self.tokenizer)
-
-        args = TrainingArguments(
-            output_dir=self.cfg.out_dir,
-            overwrite_output_dir=True,
-            num_train_epochs=epochs,
-            per_device_train_batch_size=batch_size,
-            learning_rate=lr,
-            logging_steps=50,
-            save_strategy="epoch",
-            save_total_limit=1,
-            report_to=[],
-        )
-
-        trainer = Trainer(
-            model=self.model,
-            args=args,
-            train_dataset=ds,
-            tokenizer=self.tokenizer,
-            data_collator=collator,
-        )
-        trainer.train()
-        trainer.save_model(self.cfg.out_dir)
-        self.tokenizer.save_pretrained(self.cfg.out_dir)
-
-        # Reload cleanly
-        self.load()
 
     @torch.inference_mode()
-    def predict_batch(self, sentences: List[str], batch_size: int = 32) -> List[Dict[str, object]]:
+    def predict_batch(
+        self,
+        sentences: List[str],
+        batch_size: int = 4,
+    ) -> List[Dict[str, object]]:
         if self.model is None or self.tokenizer is None:
             if self.exists():
                 self.load()
             else:
-                raise ValueError("BERT model missing. Train it or provide --train_bert_if_missing.")
+                raise ValueError(
+                    f"BERT model missing at {self.cfg.out_dir}."
+                )
 
-        self.model.eval()
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if not sentences:
+            return []
+
+        if batch_size < 1:
+            raise ValueError("batch_size must be at least 1.")
+
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            device = torch.device("mps")
+        else:
+            device = torch.device("cpu")
+
+        # Place the model and all input tensors on the same device.
         self.model.to(device)
+        self.model.eval()
+
+        print(f"BERT device: {next(self.model.parameters()).device}")
 
         out = []
+
         for i in range(0, len(sentences), batch_size):
-            batch = sentences[i:i+batch_size]
-            enc = self.tokenizer(batch, return_tensors="pt", padding=True, truncation=True, max_length=self.cfg.max_length).to(device)
+            batch = sentences[i:i + batch_size]
+
+            enc = self.tokenizer(
+                batch,
+                return_tensors="pt",
+                padding=True,
+                truncation=True,
+                max_length=self.cfg.max_length,
+            )
+            enc = {
+                name: tensor.to(device)
+                for name, tensor in enc.items()
+            }
+
             logits = self.model(**enc).logits
             probs = torch.softmax(logits, dim=-1)
-            pred = torch.argmax(probs, dim=-1).tolist()
-            conf = torch.max(probs, dim=-1).values.tolist()
 
-            for s, p, c in zip(batch, pred, conf):
+            predictions = probs.argmax(dim=-1).cpu().tolist()
+            confidences = probs.max(dim=-1).values.cpu().tolist()
+
+            for sentence, prediction, confidence in zip(
+                batch, predictions, confidences
+            ):
                 out.append({
-                    "sentence": s,
-                    "predicted_label": INV_LABEL_MAP_DEFAULT[int(p)],
-                    "confidence": float(c),
+                    "sentence": sentence,
+                    "predicted_label": self.model.config.id2label[
+                        int(prediction)
+                    ],
+                    "confidence": float(confidence),
                 })
+
         return out

@@ -1,0 +1,39 @@
+{
+  "imported": [
+    {
+      "source": "outputs/pipeline_sample_5/triples.trace.jsonl",
+      "sha256": "49c459da5ed889876ec222c0916105d70b7c1fff0fcf81d3e6469c4264b90a0c",
+      "doc_ids": [
+        "168"
+      ]
+    },
+    {
+      "source": "outputs/pipeline_sample_5_resume_v2/triples.trace.jsonl",
+      "sha256": "04ee979298ce5dfc227b323d0596b32cc5bc5b8139f256e0805e123c204342fd",
+      "doc_ids": [
+        "313"
+      ]
+    }
+  ],
+  "legacy_configuration": "Token limits and gateway were not recorded; exact equivalence cannot be verified.",
+  "reported_failure": {
+    "doc_id": "315",
+    "stage": "relation_extraction",
+    "error": "APITimeoutError after four successful requests; user report, no persisted failure log found"
+  },
+  "other_attempt_directories": {
+    "outputs/pipeline_sample_5_resume_v3": [],
+    "outputs/pipeline_sample_5_resume_v2": [
+      "outputs/pipeline_sample_5_resume_v2/triples.trace.jsonl"
+    ],
+    "outputs/pipeline_sample_5_resume": []
+  },
+  "current_limits": {
+    "coreference": 1024,
+    "relation_extraction": 2048,
+    "compound": 1024,
+    "complex": 512,
+    "compound_complex": 1024
+  },
+  "historical_limits": "Relation extraction reportedly changed from 512 to 2048; assignment to individual legacy traces is not provable."
+}

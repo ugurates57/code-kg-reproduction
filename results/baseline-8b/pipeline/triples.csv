@@ -1,0 +1,185 @@
+doc_id,simple_sentence_index,simple_sentence,entity_1,relationship,entity_2
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,diagnosis and treatment,including,immunotherapy
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,diagnosis and treatment,including,immunotherapy
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,diagnosis and treatment,including,immunotherapy
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,diagnosis and treatment,are also,reviewed
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,immunotherapy,are also,reviewed
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,diagnosis and treatment,including,immunotherapy
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,diagnosis and treatment,are also,reviewed
+168,0,The diagnosis and treatment (including immunotherapy) The diagnosis and treatment (including immunotherapy) (including immunotherapy) are also reviewed.,immunotherapy,are also,reviewed
+168,1,Adenocarcinoma (ADC) is the most common form of lung cancer.,Adenocarcinoma (ADC),is the most common form of,lung cancer
+168,2,"However, some other types of lung cancer can sometimes mimic ADC.",some other types of lung cancer,can sometimes mimic,ADC
+168,3,We present a patient with pulmonary pleomorphic carcinoma.,a patient,has,pulmonary pleomorphic carcinoma
+168,4,The patient was misdiagnosed with Adenocarcinoma (ADC).,The patient,was misdiagnosed,Adenocarcinoma (ADC)
+168,5,The patient was treated with pembrolizumab for 13 months.,patient,was treated with,pembrolizumab
+168,5,The patient was treated with pembrolizumab for 13 months.,patient,was treated for,13 months
+313,0,Analysis of lung cancer risk factor-related death rate and DALYs was performed.,analysis of lung cancer risk factor-related death rate and DALYs,is about,lung cancer
+313,0,Analysis of lung cancer risk factor-related death rate and DALYs was performed.,analysis of lung cancer risk factor-related death rate and DALYs,is about,risk factor-related death rate
+313,0,Analysis of lung cancer risk factor-related death rate and DALYs was performed.,analysis of lung cancer risk factor-related death rate and DALYs,is about,DALYs
+313,0,Analysis of lung cancer risk factor-related death rate and DALYs was performed.,analysis of lung cancer risk factor-related death rate and DALYs,is about,lung cancer
+313,0,Analysis of lung cancer risk factor-related death rate and DALYs was performed.,analysis of lung cancer risk factor-related death rate and DALYs,is about,risk factor-related death rate
+313,0,Analysis of lung cancer risk factor-related death rate and DALYs was performed.,analysis of lung cancer risk factor-related death rate and DALYs,is about,DALYs
+313,1,Age-standardized rates (ASR) and estimated annual percentage change (EAPC) were calculated.,Age-standardized rates (ASR),were calculated,estimated annual percentage change (EAPC)
+313,2,The incidence trend of lung cancer in China from 2020 to 2034 was predicted by the Nordpred age-period-cohort (APC) model.,incidence trend of lung cancer,located in,China
+313,2,The incidence trend of lung cancer in China from 2020 to 2034 was predicted by the Nordpred age-period-cohort (APC) model.,incidence trend of lung cancer,predicted by,Nordpred APC model
+313,2,The incidence trend of lung cancer in China from 2020 to 2034 was predicted by the Nordpred age-period-cohort (APC) model.,Nordpred APC model,used for,Time period (2020-2034)
+313,3,The age-standardized incidence rate (ASIR) death rate in China was 30.2/100000 in 1990.,age-standardized incidence rate (ASIR) death rate,in,China
+313,3,The age-standardized incidence rate (ASIR) death rate in China was 30.2/100000 in 1990.,age-standardized incidence rate (ASIR) death rate,was,30.2/100000
+313,3,The age-standardized incidence rate (ASIR) death rate in China was 30.2/100000 in 1990.,age-standardized incidence rate (ASIR) death rate,in,1990
+313,4,The 95 % UI was 26.2-34.3.,95 % UI,has a value of,26.2-34.3
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,ASIR,is related to,death rate
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,death rate in China,is,41.7/100000
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,death rate in China,was observed in,2019
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,ASIR,is a type of,death rate
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,ASIR,is a type of,death rate
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,death rate in China,is,41.7/100000
+313,5,The age-standardized incidence rate (ASIR) death rate in China was 41.7/100000 in 2019.,death rate in China,was observed in,2019
+313,6,The 95 % UI was 35.2-48.8.,95 %,represents,UI
+313,6,The 95 % UI was 35.2-48.8.,UI,is equal to,35.2-48.8
+313,6,The 95 % UI was 35.2-48.8.,95 %,represents,UI
+313,6,The 95 % UI was 35.2-48.8.,UI,is equal to,35.2-48.8
+313,7,The DALYs of lung cancer in China was 1.33.,DALYs,of,lung cancer in China
+313,7,The DALYs of lung cancer in China was 1.33.,lung cancer in China,was,1.33
+313,8,The 95 % CI was 1.16-1.49.,95 % CI,was,1.16-1.49
+313,9,Lung cancer in China becomes a primary source of death rate in China.,Lung cancer in China,becomes,a primary source of death rate in China
+313,10,"Investigation on incidence rate, death rate in China, and disability-adjusted life years is of great significance.",Investigation,on,"incidence rate, death rate in China, and disability-adjusted life years"
+313,10,"Investigation on incidence rate, death rate in China, and disability-adjusted life years is of great significance.","incidence rate, death rate in China, and disability-adjusted life years",and,"incidence rate, death rate in China, and disability-adjusted life years"
+313,10,"Investigation on incidence rate, death rate in China, and disability-adjusted life years is of great significance.",Investigation,is of great,significance
+313,11,The investigation is to optimize prevention measures and allocation of healthcare resources.,The investigation,is to optimize,prevention measures
+313,11,The investigation is to optimize prevention measures and allocation of healthcare resources.,allocation,of,healthcare resources
+313,12,We utilized data from the Global Burden of Disease (GBD) database.,data,utilized,Global Burden of Disease (GBD) database
+313,13,The database was used to evaluate the incidence rate and death rate in China.,The database,was used,evaluate
+313,13,The database was used to evaluate the incidence rate and death rate in China.,evaluate,to,incidence rate
+313,13,The database was used to evaluate the incidence rate and death rate in China.,evaluate,to,death rate
+313,13,The database was used to evaluate the incidence rate and death rate in China.,incidence rate,in,China
+313,13,The database was used to evaluate the incidence rate and death rate in China.,death rate,in,China
+313,13,The database was used to evaluate the incidence rate and death rate in China.,The database,was used,evaluate
+313,13,The database was used to evaluate the incidence rate and death rate in China.,evaluate,to,incidence rate
+313,13,The database was used to evaluate the incidence rate and death rate in China.,evaluate,to,death rate
+313,13,The database was used to evaluate the incidence rate and death rate in China.,incidence rate,in,China
+313,13,The database was used to evaluate the incidence rate and death rate in China.,death rate,in,China
+313,14,The incidence rate and death rate were evaluated for lung cancer in China.,incidence rate and death rate,were evaluated,lung cancer
+313,14,The incidence rate and death rate were evaluated for lung cancer in China.,lung cancer,were evaluated for,China
+313,15,The evaluation was done from 1990 to 2019.,The evaluation,occurred from,1990
+313,15,The evaluation was done from 1990 to 2019.,The evaluation,occurred until,2019
+313,16,The DALYs of lung cancer in China were also evaluated.,DALYs of lung cancer,were evaluated in,China
+313,17,"Men in China were noted for the highest incidence rate, death rate, and DALYs rate across three age groups.",Men in China,were noted for,"highest incidence rate, death rate, and DALYs rate"
+313,17,"Men in China were noted for the highest incidence rate, death rate, and DALYs rate across three age groups.",Men in China,across,three age groups
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",15-49 years,is,age group
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",50-69 years,is,age group
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",over 70,is,age group
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",15-49 years,is different from,50-69 years
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",15-49 years,is different from,over 70
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",50-69 years,is different from,over 70
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",15-49 years,is a range of,years
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",50-69 years,is a range of,years
+313,18,"The age groups were 15-49 years, 50-69 years, and over 70.",over 70,is a range of,years
+313,19,The period of time was from 1990 to 2019.,period of time,from,1990
+313,19,The period of time was from 1990 to 2019.,period of time,to,2019
+313,20,Men in China had a lower ASIR of lung cancer than females in China.,Men in China,had,a lower ASIR of lung cancer
+313,20,Men in China had a lower ASIR of lung cancer than females in China.,a lower ASIR of lung cancer,than,females in China
+313,21,"The predominant risk factors of lung cancer in China were smoking, air pollution, and diet.",predominant risk factors of lung cancer,is related to,lung cancer
+313,21,"The predominant risk factors of lung cancer in China were smoking, air pollution, and diet.",lung cancer,is prevalent in,China
+313,21,"The predominant risk factors of lung cancer in China were smoking, air pollution, and diet.",predominant risk factors,include,smoking
+313,21,"The predominant risk factors of lung cancer in China were smoking, air pollution, and diet.",predominant risk factors,include,air pollution
+313,21,"The predominant risk factors of lung cancer in China were smoking, air pollution, and diet.",predominant risk factors,include,diet
+313,22,Smoking was the most significant risk factor for lung cancer in China.,Smoking,was the most significant risk factor for,lung cancer
+313,22,Smoking was the most significant risk factor for lung cancer in China.,lung cancer,is prevalent in,China
+313,22,Smoking was the most significant risk factor for lung cancer in China.,Smoking,was the most significant risk factor for,lung cancer
+313,22,Smoking was the most significant risk factor for lung cancer in China.,lung cancer,is prevalent in,China
+313,23,The analysis results showed that new cases and deaths may increase in the following 15 years since 2020.,analysis results,showed,new cases and deaths
+313,23,The analysis results showed that new cases and deaths may increase in the following 15 years since 2020.,new cases and deaths,may increase in,following 15 years
+313,23,The analysis results showed that new cases and deaths may increase in the following 15 years since 2020.,following 15 years,since,2020
+313,24,The increase is in the context of lung cancer in China.,The increase,is associated with,lung cancer
+313,24,The increase is in the context of lung cancer in China.,lung cancer,occurs in,China
+313,25,Lung cancer is a heavy burden in China.,Lung cancer,is a,a heavy burden in China
+313,26,China must issue corresponding policies.,China,must issue,policies
+313,27,The policies should roll out prevention avenues against smoking.,The policies,should roll out,prevention avenues against smoking
+313,28,Smoking is a risk factor for lung cancer.,Smoking,is a risk factor for,lung cancer
+313,29,Air pollution is also a risk factor for lung cancer.,Air pollution,is a risk factor for,lung cancer
+315,0,Lung cancer has been recognized as one of the most often diagnosed and perhaps most lethal cancer diseases worldwide.,Lung cancer,has been recognized as,one of the most often diagnosed
+315,0,Lung cancer has been recognized as one of the most often diagnosed and perhaps most lethal cancer diseases worldwide.,one of the most often diagnosed,characterized as,cancer diseases
+315,0,Lung cancer has been recognized as one of the most often diagnosed and perhaps most lethal cancer diseases worldwide.,cancer diseases,are present,worldwide
+315,0,Lung cancer has been recognized as one of the most often diagnosed and perhaps most lethal cancer diseases worldwide.,cancer diseases,characterized as,most lethal
+315,1,Conventional chemotherapy for lung cancer has bumped into various limitations and challenges.,Conventional chemotherapy for lung cancer,has bumped into,various limitations and challenges
+315,2,The challenges include non-targeted drug delivery.,challenges,include,non-targeted drug delivery
+315,3,The challenges also include a short drug retention period.,challenges,include,a short drug retention period
+315,4,The challenges also include low therapeutic efficacy.,challenges,include,therapeutic efficacy
+315,5,The challenges also include multidrug resistance (MDR).,The challenges,include,multidrug resistance (MDR)
+315,6,Chitosan (CS) has emerged as an essential element for the development of a nano-particulate delivery vehicle.,Chitosan (CS),has emerged as an essential element for the development of,nano-particulate delivery vehicle
+315,7,Chitosan is a natural polymer derived from deacetylation of chitin.,Chitosan,is a,natural polymer
+315,7,Chitosan is a natural polymer derived from deacetylation of chitin.,Chitosan,is derived from deacetylation of,chitin
+315,7,Chitosan is a natural polymer derived from deacetylation of chitin.,Chitosan,is a,natural polymer
+315,7,Chitosan is a natural polymer derived from deacetylation of chitin.,Chitosan,is derived from deacetylation of,chitin
+315,8,The polymer is comprised of arbitrarily distributed β-(1-4)-linked d-glucosamine and N-acetyl-d-glucosamine.,polymer,is comprised of,β-(1-4)-linked d-glucosamine
+315,8,The polymer is comprised of arbitrarily distributed β-(1-4)-linked d-glucosamine and N-acetyl-d-glucosamine.,polymer,is comprised of,N-acetyl-d-glucosamine
+315,9,Chitosan exhibits magnificent characteristics.,Chitosan,exhibits,magnificent characteristics
+315,10,"The characteristics include being mucoadhesive, biodegradable, and biocompatible.",characteristics,include,mucoadhesive
+315,10,"The characteristics include being mucoadhesive, biodegradable, and biocompatible.",characteristics,include,biodegradable
+315,10,"The characteristics include being mucoadhesive, biodegradable, and biocompatible.",characteristics,include,biocompatible
+315,11,The flexibility of Chitosan structure has made CS easy for the modification and functionalization.,Chitosan structure,has made easy for,modification and functionalization
+315,12,CS is due to the free protonable amino groups in the CS backbone.,CS,due to,free protonable amino groups
+315,12,CS is due to the free protonable amino groups in the CS backbone.,CS backbone,in,free protonable amino groups
+315,13,Chitosan can be developed into a nanoparticle system with high adaptability in lung cancer.,Chitosan,can be developed into,nanoparticle system
+315,13,Chitosan can be developed into a nanoparticle system with high adaptability in lung cancer.,nanoparticle system,has high adaptability in,lung cancer
+315,14,This review will discuss the current state of chitosan nanoparticle systems.,This review,will describe,the current state of chitosan nanoparticle systems
+315,15,"The discussion will include the advantages, challenges, and opportunities of CNP systems.",The discussion,include,advantages
+315,15,"The discussion will include the advantages, challenges, and opportunities of CNP systems.",The discussion,include,challenges
+315,15,"The discussion will include the advantages, challenges, and opportunities of CNP systems.",The discussion,include,opportunities
+315,16,The review will also cover drug release mechanisms and mathematical kinetic models.,review,will cover,drug release mechanisms
+315,16,The review will also cover drug release mechanisms and mathematical kinetic models.,review,will cover,mathematical kinetic models
+315,17,Various modification routes of chitosan nanoparticle are covered.,modification routes,are covered in relation to,chitosan nanoparticle
+315,17,Various modification routes of chitosan nanoparticle are covered.,modification routes,are covered in relation to,chitosan nanoparticle
+315,18,The routes are for improved and enhanced therapeutic efficacy.,The routes,are for improved and enhanced,therapeutic efficacy
+315,18,The routes are for improved and enhanced therapeutic efficacy.,The routes,are for,therapeutic efficacy
+315,18,The routes are for improved and enhanced therapeutic efficacy.,The routes,improved and enhanced,therapeutic efficacy
+315,19,Other restrictions of conventional drug administration for lung cancer treatment are also covered.,Other restrictions,of,conventional drug administration
+315,19,Other restrictions of conventional drug administration for lung cancer treatment are also covered.,conventional drug administration,for,lung cancer treatment
+315,19,Other restrictions of conventional drug administration for lung cancer treatment are also covered.,Other restrictions,of,conventional drug administration
+315,19,Other restrictions of conventional drug administration for lung cancer treatment are also covered.,conventional drug administration,for,lung cancer treatment
+327,0,"Lung cancer is one of the high malignancy-related incidence and mortality worldwide, accounting for about 13% of total cancer diagnoses.",Lung cancer,is one of,high malignancy-related incidence and mortality
+327,0,"Lung cancer is one of the high malignancy-related incidence and mortality worldwide, accounting for about 13% of total cancer diagnoses.",Lung cancer,occurring in,worldwide
+327,0,"Lung cancer is one of the high malignancy-related incidence and mortality worldwide, accounting for about 13% of total cancer diagnoses.",high malignancy-related incidence and mortality,accounting for,about 13% of total cancer diagnoses
+327,0,"Lung cancer is one of the high malignancy-related incidence and mortality worldwide, accounting for about 13% of total cancer diagnoses.",Lung cancer,is one of,high malignancy-related incidence and mortality
+327,0,"Lung cancer is one of the high malignancy-related incidence and mortality worldwide, accounting for about 13% of total cancer diagnoses.",Lung cancer,occurring in,worldwide
+327,0,"Lung cancer is one of the high malignancy-related incidence and mortality worldwide, accounting for about 13% of total cancer diagnoses.",high malignancy-related incidence and mortality,accounting for,about 13% of total cancer diagnoses
+327,1,"Currently, the use of anti-cancer agents is still the main therapeutic method for lung cancer.",anti-cancer agents,is still the main therapeutic method for,lung cancer
+327,1,"Currently, the use of anti-cancer agents is still the main therapeutic method for lung cancer.",anti-cancer agents,is the main therapeutic method for,lung cancer
+327,1,"Currently, the use of anti-cancer agents is still the main therapeutic method for lung cancer.",anti-cancer agents,still,lung cancer
+327,2,circRNAs are newly identified noncoding RNAs molecules with covalently closed circular structures.,CircRNAs,characterized by,newly identified noncoding RNAs molecules with covalently closed circular structures
+327,3,Cancer cells will gradually develop resistance to drugs.,Cancer cells,will develop,resistance
+327,3,Cancer cells will gradually develop resistance to drugs.,resistance,to,drugs
+327,4,The resistance is to drugs.,The resistance,is to,drugs
+327,5,The progress of treatment leads to the resistance.,progress of treatment,leads to,resistance
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,circRNAs,are associated with,tumorigenesis and progression of various cancers
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,circRNAs,are associated with,various cancers
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,tumorigenesis and progression of various cancers,of,various cancers
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,tumorigenesis and progression of various cancers,and,tumorigenesis
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,tumorigenesis and progression of various cancers,and,progression
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,tumorigenesis,and,progression
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,tumorigenesis,of,various cancers
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,progression,of,various cancers
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,progression,and,tumorigenesis
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,various cancers,and,tumorigenesis
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,various cancers,and,progression
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,various cancers,of,tumorigenesis
+327,6,Previous studies have shown that circRNAs are associated with tumorigenesis and progression of various cancers.,various cancers,of,progression
+327,7,The cancers include lung cancer.,cancers,include,lung cancer
+327,8,Growing reports have suggested that circRNAs could contribute to drug resistance of lung cancer cell.,reports,have suggested that,circRNAs
+327,8,Growing reports have suggested that circRNAs could contribute to drug resistance of lung cancer cell.,circRNAs,could contribute to,drug resistance of lung cancer cell
+327,9,The reports suggested that circRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,reports,suggested,circRNAs contributing to drug resistance of lung cancer cell
+327,9,The reports suggested that circRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,reports,suggest,circRNAs contributing to drug resistance of lung cancer cell
+327,9,The reports suggested that circRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,circRNAs,contribute to,drug resistance of lung cancer cell
+327,9,The reports suggested that circRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,reports,suggest,circRNAs contributing to drug resistance of lung cancer cell
+327,9,The reports suggested that circRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,circRNAs,contribute to,drug resistance of lung cancer cell
+327,10,CircRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,CircRNAs,contribute to,drug resistance of lung cancer cell
+327,10,CircRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,CircRNAs,through,different mechanisms
+327,10,CircRNAs could contribute to drug resistance of lung cancer cell through different mechanisms.,lung cancer cell,has,drug resistance
+327,11,CircRNAs summarized the functions and underlying mechanisms of circRNAs in regulating chemoresistance of lung cancer.,CircRNAs,summarized,functions and underlying mechanisms
+327,11,CircRNAs summarized the functions and underlying mechanisms of circRNAs in regulating chemoresistance of lung cancer.,CircRNAs,regulating,chemoresistance of lung cancer
+327,11,CircRNAs summarized the functions and underlying mechanisms of circRNAs in regulating chemoresistance of lung cancer.,circRNAs,regulating,chemoresistance of lung cancer
+327,11,CircRNAs summarized the functions and underlying mechanisms of circRNAs in regulating chemoresistance of lung cancer.,CircRNAs,summarized,functions and underlying mechanisms
+327,11,CircRNAs summarized the functions and underlying mechanisms of circRNAs in regulating chemoresistance of lung cancer.,CircRNAs,regulating,chemoresistance of lung cancer
+327,11,CircRNAs summarized the functions and underlying mechanisms of circRNAs in regulating chemoresistance of lung cancer.,circRNAs,regulating,chemoresistance of lung cancer
+327,12,"CircRNAs have potential applications for diagnosis, prognosis, and lung cancer.",CircRNAs,have,potential applications
+327,12,"CircRNAs have potential applications for diagnosis, prognosis, and lung cancer.",potential applications,for,"diagnosis, prognosis, and lung cancer"

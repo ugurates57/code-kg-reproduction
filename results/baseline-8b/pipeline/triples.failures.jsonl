@@ -1,0 +1,1 @@
+{"doc_id": "394", "stage": "coreference", "error_type": "TruncatedResponseError", "timestamp": "2026-11-11T17:44:47.683722+00:00", "message": "Output token limit reached (1024); response discarded"}

@@ -1,0 +1,14 @@
+{
+    "epoch": 3.0,
+    "eval_accuracy": 0.9025,
+    "eval_f1_Complex_Sentence": 0.8819875776397516,
+    "eval_f1_Compound-Complex_Sentence": 0.8051948051948052,
+    "eval_f1_Compound_Sentence": 0.8625,
+    "eval_f1_Incomplete_Sentence": 0.9937106918238994,
+    "eval_f1_Simple_Sentence": 0.963855421686747,
+    "eval_loss": 0.36640509963035583,
+    "eval_macro_f1": 0.9014496992690406,
+    "eval_runtime": 12.506,
+    "eval_samples_per_second": 31.985,
+    "eval_steps_per_second": 31.985
+}

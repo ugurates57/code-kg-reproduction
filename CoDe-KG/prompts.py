@@ -161,5 +161,17 @@ REL_EXTRACT_USER = r"""Now extract knowledge graph relationships from this sente
 """
 
 
-def build_prompt(system_text: str, user_text: str, **kwargs) -> str:
-    return system_text.strip() + "\n\n" + user_text.format(**kwargs).strip()
+# def build_prompt(system_text: str, user_text: str, **kwargs) -> str:
+    # return system_text.strip() + "\n\n" + user_text.format(**kwargs).strip()
+
+def build_prompt(system_text: str, user_text: str, **kwargs) -> list[dict[str, str]]:
+    return [
+        {
+            "role": "system",
+            "content": system_text.strip(),
+        },
+        {
+            "role": "user",
+            "content": user_text.format(**kwargs).strip(),
+        },
+    ]

@@ -3,8 +3,13 @@ import os
 import argparse
 import pandas as pd
 
+import json
+from pathlib import Path
+
 from tokenize_paper import tokens_with_indices, format_pairs
-from llm_runtime import LLM, set_seed
+from llm_runtime import LLM, set_seed, GenerationError
+from pipeline_resume import read_traces, append_record, reconstruct_csv, configuration
+from datetime import datetime, timezone
 from coref_stage import build_coref_prompt, parse_coref_output, apply_coref_switch
 from sentence_split_stage import split_sentences
 from bert_sentence_classifier import BertSentenceClassifier, BertClassifierConfig
@@ -57,18 +62,50 @@ def main():
     parser.add_argument("--bert_train_batch_size", type=int, default=8)
     parser.add_argument("--bert_lr", type=float, default=2e-5)
 
+    parser.add_argument('--import_trace', action='append', default=[])
+    parser.add_argument('--accept_legacy_provenance', action='store_true')
+    parser.add_argument('--rebuild_csv_only', action='store_true')
+    parser.add_argument('--bypass_cache', action='store_true')
     args = parser.parse_args()
-    set_seed(args.seed)
+    # Prepare output paths before making API requests.
+    output_path = Path(args.out_csv)
+    trace_path = output_path.with_suffix(".trace.jsonl")
 
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     df_abs = read_abstracts(args)
-
-    # Load LLMs (lazy: only load when needed)
+    if df_abs['doc_id'].duplicated().any():
+        raise ValueError('Duplicate document IDs in input')
+    paths = ([trace_path] if trace_path.exists() else []) + args.import_trace
+    completed = read_traces(paths)
+    inputs = dict(zip(df_abs.doc_id.astype(str), df_abs.abstract))
+    for key, record in completed.items():
+        if key not in inputs or inputs[key] != record['original_text']:
+            raise ValueError(f'Trace/input conflict for {key}')
+    if args.rebuild_csv_only:
+        reconstruct_csv(completed, output_path)
+        return
+    if args.bypass_cache:
+        os.environ['LLM_CACHE_BYPASS'] = '1'
     mixtral_llm = LLM(MIXTRAL)
     llama8_llm = LLM(LLAMA_31_8B)
     llama70_llm = LLM(LLAMA_33_70B)
-
+    run_configuration = configuration(args)
+    for key, record in completed.items():
+        metadata = record.get('resume_configuration')
+        if metadata is not None and metadata != run_configuration:
+            raise ValueError(f'Configuration conflict for {key}')
+        if metadata is None and not args.accept_legacy_provenance:
+            raise ValueError('Legacy trace requires --accept_legacy_provenance')
+    existing = read_traces([trace_path]) if trace_path.exists() else {}
+    for key, record in completed.items():
+        if key not in existing:
+            append_record(trace_path, record)
+    set_seed(args.seed)
     # BERT classifier (train once if needed)
-    bert_cfg = BertClassifierConfig(out_dir=args.bert_out_dir)
+    bert_cfg = BertClassifierConfig(
+        out_dir=args.bert_out_dir,
+        max_length=256,
+    )
     bert = BertSentenceClassifier(bert_cfg)
     if bert.exists():
         bert.load()
@@ -85,116 +122,144 @@ def main():
         else:
             raise ValueError(f"No finetuned BERT found at {args.bert_out_dir}. Use --train_bert_if_missing.")
 
-    all_rows = []
+    succeeded = failed = skipped = 0
 
     for _, row in df_abs.iterrows():
         doc_id = row["doc_id"]
         abstract = row["abstract"]
 
-        # 1) Tokenize as in paper
-        pairs = tokens_with_indices(abstract, keep_punct=True)
-        tokenized_text = format_pairs(pairs)
+        if str(doc_id) in completed:
+            skipped += 1
+            continue
+        try:
+            stage = "coreference"
+            # 1) Tokenize as in paper
+            pairs = tokens_with_indices(abstract, keep_punct=True)
+            tokenized_text = format_pairs(pairs)
 
-        # 2) Coref with Mixtral
-        coref_prompt = build_coref_prompt(tokenized_text)
-        coref_out = mixtral_llm.generate_batch(
-            prompts=[coref_prompt],
-            max_new_tokens=1024,
-            batch_size=1,
-            temperature=0.7,
-            top_k=40,
-            top_p=0.9,
-            do_sample=True,
-            return_full_text=False,
-        )[0][0]["generated_text"].strip()
+            # 2) Coref with Mixtral
+            coref_prompt = build_coref_prompt(tokenized_text)
+            coref_out = mixtral_llm.generate_batch(
+                prompts=[coref_prompt], max_new_tokens=1024, batch_size=1,
+                temperature=0.7, top_k=40, top_p=0.9, do_sample=True,
+                return_full_text=False,
+            )[0][0]['generated_text'].strip()
 
-        corefs = parse_coref_output(coref_out)
+            corefs = parse_coref_output(coref_out)
 
-        # 3) Switch coref into text (PBC -> Primary biliary cirrhosis at indices)
-        switched = apply_coref_switch(tokenized_text, corefs)
+            # 3) Switch coref into text (PBC -> Primary biliary cirrhosis at indices)
+            switched = apply_coref_switch(tokenized_text, corefs)
 
-        print(f"\n[DOC {doc_id}] ==============================")
-        print(f"[DOC {doc_id}] Abstract chars: {len(abstract)}")
+            print(f"\n[DOC {doc_id}] ==============================")
+            print(f"[DOC {doc_id}] Abstract chars: {len(abstract)}")
 
-        print(f"[DOC {doc_id}] Tokens: {len(pairs)}")
-        print(f"[DOC {doc_id}] Coref spans: {len(corefs)}")
+            print(f"[DOC {doc_id}] Tokens: {len(pairs)}")
+            print(f"[DOC {doc_id}] Coref spans: {len(corefs)}")
 
-        print(f"[DOC {doc_id}] Switched snippet: {switched[:200]}...")
-
-
-
-        # 4) Sentence split
-        sentences = split_sentences(switched)
-
-        print(f"[DOC {doc_id}] Sentences: {len(sentences)}")
-        if len(sentences) > 0:
-            print(f"[DOC {doc_id}] Sentence[0]: {sentences[0]}")
+            print(f"[DOC {doc_id}] Switched snippet: {switched[:200]}...")
 
 
-        # 5) BERT classify
-        preds = bert.predict_batch(sentences, batch_size=32)
-        cls_df = pd.DataFrame(preds)
+
+            # 4) Sentence split
+            sentences = split_sentences(switched)
+
+            print(f"[DOC {doc_id}] Sentences: {len(sentences)}")
+            if len(sentences) > 0:
+                print(f"[DOC {doc_id}] Sentence[0]: {sentences[0]}")
+
+
+            # 5) BERT classify
+            preds = bert.predict_batch(sentences, batch_size=4)
+            cls_df = pd.DataFrame(preds)
+            print("\nSentence classification:")
+            print(cls_df.to_string(index=False))
 
         
 
-        simple_sents = cls_df[cls_df["predicted_label"] == "Simple Sentence"]["sentence"].tolist()
-        compound_sents = cls_df[cls_df["predicted_label"] == "Compound Sentence"]["sentence"].tolist()
-        complex_sents = cls_df[cls_df["predicted_label"] == "Complex Sentence"]["sentence"].tolist()
-        cc_sents = cls_df[cls_df["predicted_label"] == "Compound-Complex Sentence"]["sentence"].tolist()
+            simple_sents = cls_df[cls_df["predicted_label"] == "Simple Sentence"]["sentence"].tolist()
+            compound_sents = cls_df[cls_df["predicted_label"] == "Compound Sentence"]["sentence"].tolist()
+            complex_sents = cls_df[cls_df["predicted_label"] == "Complex Sentence"]["sentence"].tolist()
+            cc_sents = cls_df[cls_df["predicted_label"] == "Compound-Complex Sentence"]["sentence"].tolist()
 
-        print(f"[DOC {doc_id}] Label counts → "
-        f"Simple={len(simple_sents)} | "
-        f"Compound={len(compound_sents)} | "
-        f"Complex={len(complex_sents)} | "
-        f"Compound-Complex={len(cc_sents)}")
+            print(f"[DOC {doc_id}] Label counts → "
+            f"Simple={len(simple_sents)} | "
+            f"Compound={len(compound_sents)} | "
+            f"Complex={len(complex_sents)} | "
+            f"Compound-Complex={len(cc_sents)}")
 
-        if len(sentences) > 0 and (len(simple_sents)+len(compound_sents)+len(complex_sents)+len(cc_sents)) != len(sentences):
-          print(f"[DOC {doc_id}] ⚠️ WARNING: label split count != total sentences")
+            if len(sentences) > 0 and (len(simple_sents)+len(compound_sents)+len(complex_sents)+len(cc_sents)) != len(sentences):
+              print(f"[DOC {doc_id}] ⚠️ WARNING: label split count != total sentences")
 
-        # 6) Simplify (route to correct LLM)
-        simplified_rows = []
-        if compound_sents:
-            simplified_rows += simplify_sentences_for_class(llama8_llm, "Compound Sentence", compound_sents, args.batch_size)
-        if complex_sents:
-            simplified_rows += simplify_sentences_for_class(llama70_llm, "Complex Sentence", complex_sents, args.batch_size)
-        if cc_sents:
-            simplified_rows += simplify_sentences_for_class(mixtral_llm, "Compound-Complex Sentence", cc_sents, args.batch_size)
+            # 6) Simplify (route to correct LLM)
+            stage = "simplification"
+            simplified_rows = []
+            if compound_sents:
+                simplified_rows += simplify_sentences_for_class(llama8_llm, "Compound Sentence", compound_sents, args.batch_size)
+            if complex_sents:
+                simplified_rows += simplify_sentences_for_class(llama70_llm, "Complex Sentence", complex_sents, args.batch_size)
+            if cc_sents:
+                simplified_rows += simplify_sentences_for_class(mixtral_llm, "Compound-Complex Sentence", cc_sents, args.batch_size)
 
-        converted_simple = []
-        for r in simplified_rows:
-            converted_simple.extend(r.get("simplified_sentences") or [])
+            converted_simple = []
+            for r in simplified_rows:
+                converted_simple.extend(r.get("simplified_sentences") or [])
 
-        final_simple_sentences = simple_sents + converted_simple
+            final_simple_sentences = simple_sents + converted_simple
 
-        print(f"[DOC {doc_id}] Simplify input counts → "
-        f"Compound={len(compound_sents)} | "
-        f"Complex={len(complex_sents)} | "
-        f"Compound-Complex={len(cc_sents)}")
+            print(f"[DOC {doc_id}] Simplify input counts → "
+            f"Compound={len(compound_sents)} | "
+            f"Complex={len(complex_sents)} | "
+            f"Compound-Complex={len(cc_sents)}")
 
-        print(f"[DOC {doc_id}] Relation extractor input simple sentences: {len(final_simple_sentences)}")
+            print(f"[DOC {doc_id}] Relation extractor input simple sentences: {len(final_simple_sentences)}")
 
 
 
-        # 7) Relationship extraction with Mixtral
-        rel_rows = extract_relationships(mixtral_llm, final_simple_sentences, batch_size=args.batch_size)
+            # 7) Relationship extraction with Mixtral
+            stage = "relation_extraction"
+            rel_rows = extract_relationships(mixtral_llm, final_simple_sentences, batch_size=args.batch_size)
+                    # Save intermediate results for later inspection.
+            trace = {
+                "doc_id": str(doc_id),
+                "original_text": abstract,
+                "tokenized_text": tokenized_text,
+                "coreference": {
+                    "raw_output": coref_out,
+                    "parsed_references": corefs,
+                    "resolved_text": switched,
+                },
+                "classification": preds,
+                "simplification": simplified_rows,
+                "extraction_input": final_simple_sentences,
+                "relation_extraction": rel_rows,
+                "configuration": {
+                    "seed": args.seed,
+                    "bert_directory": str(args.bert_out_dir),
+                    "bert_max_length": bert_cfg.max_length,
+                    "coreference_model": mixtral_llm.model_name,
+                    "compound_model": llama8_llm.model_name,
+                    "complex_model": llama70_llm.model_name,
+                    "compound_complex_model": mixtral_llm.model_name,
+                    "relation_model": mixtral_llm.model_name,
+                },
+            }
 
-        # 8) Flatten to CSV rows
-        for sent_idx, rr in enumerate(rel_rows):
-            sent = rr["sentence"]
-            triples = rr.get("triples", []) or rr.get("triples", [])
-            for t in triples:
-                all_rows.append({
-                    "doc_id": doc_id,
-                    "simple_sentence_index": sent_idx,
-                    "simple_sentence": sent,
-                    "entity_1": t.get("Entity 1"),
-                    "relationship": t.get("Relationship"),
-                    "entity_2": t.get("Entity 2"),
-                })
+            trace['resume_configuration'] = run_configuration
+            append_record(trace_path, trace)
+            completed[str(doc_id)] = trace
+            succeeded += 1
+            print(f"Saved document trace: {trace_path}")
 
-    out_df = pd.DataFrame(all_rows)
-    out_df.to_csv(args.out_csv, index=False)
-    print(f"Wrote CSV: {args.out_csv} | rows={len(out_df)}")
+        except GenerationError as exc:
+            failed += 1
+            append_record(output_path.with_suffix('.failures.jsonl'), {
+                'doc_id': str(doc_id), 'stage': stage,
+                'error_type': type(exc).__name__, 'timestamp': datetime.now(timezone.utc).isoformat(),
+                'message': str(exc),
+            })
+            print(f'[DOC {doc_id}] {stage}: {exc}; continuing', flush=True)
+    reconstruct_csv(completed, output_path)
+    print(f'Completed={succeeded} failed={failed} skipped={skipped}; CSV: {output_path}')
 
 if __name__ == "__main__":
     main()

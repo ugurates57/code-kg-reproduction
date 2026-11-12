@@ -1,0 +1,7 @@
+{
+  "test_rows": 5223,
+  "accuracy": 0.887229561554662,
+  "macro_f1": 0.8760488932905899,
+  "truncated_rows": 0,
+  "max_length": 256
+}

@@ -48,7 +48,7 @@ def extract_relationships(llm, sentences: List[str], batch_size: int) -> List[Di
     prompts = [build_relation_prompt(s) for s in sentences]
     outs = llm.generate_batch(
         prompts=prompts,
-        max_new_tokens=512,
+        max_new_tokens=2048,
         batch_size=batch_size,
         temperature=0.3,
         top_k=40,

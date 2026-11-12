@@ -1,0 +1,343 @@
+{
+  "source": "datasets/coref_human_gold_annotation.json",
+  "seed": 4000,
+  "source_indices": [
+    63,
+    104,
+    106,
+    118,
+    181
+  ],
+  "documents": [
+    {
+      "doc_id": "168",
+      "annotations": [
+        {
+          "Expression": "ADC",
+          "StartToken": 1,
+          "EndToken": 1,
+          "RefersTo": "adenocarcinoma"
+        },
+        {
+          "Expression": "ADC",
+          "StartToken": 20,
+          "EndToken": 20,
+          "RefersTo": "adenocarcinoma"
+        },
+        {
+          "Expression": "we",
+          "StartToken": 35,
+          "EndToken": 35,
+          "RefersTo": "authors"
+        },
+        {
+          "Expression": "ADC",
+          "StartToken": 47,
+          "EndToken": 47,
+          "RefersTo": "adenocarcinoma"
+        }
+      ],
+      "new_text": "(\"Adenocarcinoma\", 0), (\"(ADC)\", 1), (\"is\", 2), (\"the\", 3), (\"most\", 4), (\"common\", 5), (\"form\", 6), (\"of\", 7), (\"lung\", 8), (\"cancer;\", 9), (\"however,\", 10), (\"some\", 11), (\"other\", 12), (\"types\", 13), (\"of\", 14), (\"lung\", 15), (\"cancer\", 16), (\"can\", 17), (\"sometimes\", 18), (\"mimic\", 19), (\"ADC.\", 20), (\"It\", 21), (\"then\", 22), (\"takes\", 23), (\"experienced\", 24), (\"pathologists\", 25), (\"and\", 26), (\"special\", 27), (\"stains\", 28), (\"to\", 29), (\"make\", 30), (\"the\", 31), (\"correct\", 32), (\"diagnosis.\", 33), (\"Here,\", 34), (\"we\", 35), (\"present\", 36), (\"a\", 37), (\"patient\", 38), (\"with\", 39), (\"pulmonary\", 40), (\"pleomorphic\", 41), (\"carcinoma\", 42), (\"who\", 43), (\"was\", 44), (\"misdiagnosed\", 45), (\"with\", 46), (\"ADC,\", 47), (\"and\", 48), (\"was\", 49), (\"treated\", 50), (\"with\", 51), (\"pembrolizumab\", 52), (\"for\", 53), (\"13\", 54), (\"months.\", 55), (\"The\", 56), (\"diagnosis\", 57), (\"and\", 58), (\"treatment\", 59), (\"(including\", 60), (\"immunotherapy)\", 61), (\"are\", 62), (\"also\", 63), (\"reviewed.\", 64)"
+    },
+    {
+      "doc_id": "313",
+      "annotations": [
+        {
+          "Expression": "DALYs",
+          "StartToken": 22,
+          "EndToken": 22,
+          "RefersTo": "disability-adjusted life years"
+        },
+        {
+          "Expression": "We",
+          "StartToken": 37,
+          "EndToken": 37,
+          "RefersTo": "authors"
+        },
+        {
+          "Expression": "GBD",
+          "StartToken": 46,
+          "EndToken": 46,
+          "RefersTo": "Global Burden of Disease"
+        },
+        {
+          "Expression": "DALYs",
+          "StartToken": 56,
+          "EndToken": 56,
+          "RefersTo": "disability-adjusted life years"
+        },
+        {
+          "Expression": "DALYs",
+          "StartToken": 75,
+          "EndToken": 75,
+          "RefersTo": "disability-adjusted life years"
+        },
+        {
+          "Expression": "ASR",
+          "StartToken": 80,
+          "EndToken": 80,
+          "RefersTo": "Age-standardized rates"
+        },
+        {
+          "Expression": "EAPC",
+          "StartToken": 86,
+          "EndToken": 86,
+          "RefersTo": "estimated annual percentage change"
+        },
+        {
+          "Expression": "APC",
+          "StartToken": 105,
+          "EndToken": 105,
+          "RefersTo": "age-period-cohort"
+        },
+        {
+          "Expression": "ASIR",
+          "StartToken": 111,
+          "EndToken": 111,
+          "RefersTo": "Age-standardized incidence rate"
+        },
+        {
+          "Expression": "EAPC",
+          "StartToken": 128,
+          "EndToken": 128,
+          "RefersTo": "estimated annual percentage change"
+        },
+        {
+          "Expression": "DALYs",
+          "StartToken": 149,
+          "EndToken": 149,
+          "RefersTo": "disability-adjusted life years"
+        },
+        {
+          "Expression": "ASIR",
+          "StartToken": 166,
+          "EndToken": 166,
+          "RefersTo": "Age-standardized incidence rate"
+        }
+      ],
+      "new_text": "(\"BACKGROUND:\", 0), (\"As\", 1), (\"lung\", 2), (\"cancer\", 3), (\"becomes\", 4), (\"a\", 5), (\"primary\", 6), (\"source\", 7), (\"of\", 8), (\"death\", 9), (\"in\", 10), (\"China,\", 11), (\"investigation\", 12), (\"on\", 13), (\"incidence\", 14), (\"rate,\", 15), (\"death\", 16), (\"rate,\", 17), (\"and\", 18), (\"disability-adjusted\", 19), (\"life\", 20), (\"years\", 21), (\"(DALYs)\", 22), (\"is\", 23), (\"of\", 24), (\"great\", 25), (\"significance\", 26), (\"to\", 27), (\"optimize\", 28), (\"prevention\", 29), (\"measures\", 30), (\"and\", 31), (\"allocation\", 32), (\"of\", 33), (\"healthcare\", 34), (\"resources.\", 35), (\"METHODS:\", 36), (\"We\", 37), (\"utilized\", 38), (\"data\", 39), (\"from\", 40), (\"the\", 41), (\"Global\", 42), (\"Burden\", 43), (\"of\", 44), (\"Disease\", 45), (\"(GBD)\", 46), (\"database\", 47), (\"to\", 48), (\"evaluate\", 49), (\"the\", 50), (\"incidence\", 51), (\"rate,\", 52), (\"death\", 53), (\"rate,\", 54), (\"and\", 55), (\"DALYs\", 56), (\"of\", 57), (\"lung\", 58), (\"cancer\", 59), (\"in\", 60), (\"China\", 61), (\"from\", 62), (\"1990\", 63), (\"to\", 64), (\"2019.\", 65), (\"Analysis\", 66), (\"of\", 67), (\"lung\", 68), (\"cancer\", 69), (\"risk\", 70), (\"factor-related\", 71), (\"death\", 72), (\"rate\", 73), (\"and\", 74), (\"DALYs\", 75), (\"was\", 76), (\"performed.\", 77), (\"Age-standardized\", 78), (\"rates\", 79), (\"(ASR)\", 80), (\"and\", 81), (\"estimated\", 82), (\"annual\", 83), (\"percentage\", 84), (\"change\", 85), (\"(EAPC)\", 86), (\"were\", 87), (\"calculated.\", 88), (\"The\", 89), (\"incidence\", 90), (\"trend\", 91), (\"of\", 92), (\"lung\", 93), (\"cancer\", 94), (\"from\", 95), (\"2020\", 96), (\"to\", 97), (\"2034\", 98), (\"was\", 99), (\"predicted\", 100), (\"by\", 101), (\"the\", 102), (\"Nordpred\", 103), (\"age-period-cohort\", 104), (\"(APC)\", 105), (\"model.\", 106), (\"RESULTS:\", 107), (\"Age-standardized\", 108), (\"incidence\", 109), (\"rate\", 110), (\"(ASIR)\", 111), (\"increased\", 112), (\"from\", 113), (\"30.2/100000\", 114), (\"(95\", 115), (\"%\", 116), (\"UI\", 117), (\"26.2-34.3)\", 118), (\"in\", 119), (\"1990\", 120), (\"to\", 121), (\"41.7/100000\", 122), (\"(95\", 123), (\"%\", 124), (\"UI\", 125), (\"35.2-48.8)\", 126), (\"in\", 127), (\"2019,\", 128), (\"and\", 129), (\"EAPC\", 130), (\"was\", 131), (\"1.33\", 132), (\"(95\", 133), (\"%\", 134), (\"CI\", 135), (\"1.16-1.49).\", 136), (\"From\", 137), (\"1990\", 138), (\"to\", 139), (\"2019,\", 140), (\"men\", 141), (\"were\", 142), (\"noted\", 143), (\"for\", 144), (\"the\", 145), (\"highest\", 146), (\"incidence\", 147), (\"rate,\", 148), (\"death\", 149), (\"rate,\", 150), (\"and\", 151), (\"DALYs\", 152), (\"rate\", 153), (\"across\", 154), (\"three\", 155), (\"age\", 156), (\"groups\", 157), (\"(15-49\", 158), (\"years,\", 159), (\"50-69\", 160), (\"years,\", 161), (\"and\", 162), (\"over\", 163), (\"70).\", 164), (\"During\", 165), (\"this\", 166), (\"period,\", 167), (\"the\", 168), (\"ASIR\", 169), (\"of\", 170), (\"lung\", 171), (\"cancer\", 172), (\"in\", 173), (\"females\", 174), (\"was\", 175), (\"always\", 176), (\"lower\", 177), (\"than\", 178), (\"that\", 179), (\"in\", 180), (\"males.\", 181), (\"The\", 182), (\"predominant\", 183), (\"risk\", 184), (\"factors\", 185), (\"of\", 186), (\"lung\", 187), (\"cancer\", 188), (\"were\", 189), (\"smoking,\", 190), (\"air\", 191), (\"pollution,\", 192), (\"and\", 193), (\"diet,\", 194), (\"among\", 195), (\"which\", 196), (\"smoking\", 197), (\"was\", 198), (\"the\", 199), (\"most\", 200), (\"significant\", 201), (\"one.\", 202), (\"The\", 203), (\"analysis\", 204), (\"results\", 205), (\"showed\", 206), (\"that\", 207), (\"new\", 208), (\"cases\", 209), (\"and\", 210), (\"deaths\", 211), (\"may\", 212), (\"increase\", 213), (\"in\", 214), (\"the\", 215), (\"following\", 216), (\"15\", 217), (\"years\", 218), (\"since\", 219), (\"2020\", 220), (\"in\", 221), (\"the\", 222), (\"context\", 223), (\"of\", 224), (\"lung\", 225), (\"cancer.\", 226), (\"CONCLUSION:\", 227), (\"Faced\", 228), (\"with\", 229), (\"the\", 230), (\"heavy\", 231), (\"burden\", 232), (\"of\", 233), (\"lung\", 234), (\"cancer,\", 235), (\"China\", 236), (\"must\", 237), (\"issue\", 238), (\"corresponding\", 239), (\"policies\", 240), (\"and\", 241), (\"roll\", 242), (\"out\", 243), (\"prevention\", 244), (\"avenues\", 245), (\"against\", 246), (\"smoking\", 247), (\"and\", 248), (\"air\", 249), (\"pollution.\", 250)"
+    },
+    {
+      "doc_id": "315",
+      "annotations": [
+        {
+          "Expression": "MDR",
+          "StartToken": 46,
+          "EndToken": 46,
+          "RefersTo": "multidrug resistance"
+        },
+        {
+          "Expression": "CS",
+          "StartToken": 48,
+          "EndToken": 48,
+          "RefersTo": "Chitosan"
+        },
+        {
+          "Expression": "CS",
+          "StartToken": 98,
+          "EndToken": 98,
+          "RefersTo": "Chitosan"
+        },
+        {
+          "Expression": "CS",
+          "StartToken": 109,
+          "EndToken": 109,
+          "RefersTo": "Chitosan"
+        },
+        {
+          "Expression": "CS",
+          "StartToken": 121,
+          "EndToken": 121,
+          "RefersTo": "Chitosan"
+        },
+        {
+          "Expression": "CNP",
+          "StartToken": 145,
+          "EndToken": 145,
+          "RefersTo": "chitosan nanoparticle"
+        },
+        {
+          "Expression": "CNP",
+          "StartToken": 170,
+          "EndToken": 170,
+          "RefersTo": "chitosan nanoparticle"
+        }
+      ],
+      "new_text": "(\"Lung\", 0), (\"cancer\", 1), (\"has\", 2), (\"been\", 3), (\"recognized\", 4), (\"as\", 5), (\"one\", 6), (\"of\", 7), (\"the\", 8), (\"most\", 9), (\"often\", 10), (\"diagnosed\", 11), (\"and\", 12), (\"perhaps\", 13), (\"most\", 14), (\"lethal\", 15), (\"cancer\", 16), (\"diseases\", 17), (\"worldwide.\", 18), (\"Conventional\", 19), (\"chemotherapy\", 20), (\"for\", 21), (\"lung\", 22), (\"cancer-related\", 23), (\"diseases\", 24), (\"has\", 25), (\"bumped\", 26), (\"into\", 27), (\"various\", 28), (\"limitations\", 29), (\"and\", 30), (\"challenges,\", 31), (\"including\", 32), (\"non-targeted\", 33), (\"drug\", 34), (\"delivery,\", 35), (\"short\", 36), (\"drug\", 37), (\"retention\", 38), (\"period,\", 39), (\"low\", 40), (\"therapeutic\", 41), (\"efficacy,\", 42), (\"and\", 43), (\"multidrug\", 44), (\"resistance\", 45), (\"(MDR).\", 46), (\"Chitosan\", 47), (\"(CS),\", 48), (\"a\", 49), (\"natural\", 50), (\"polymer\", 51), (\"derived\", 52), (\"from\", 53), (\"deacetylation\", 54), (\"of\", 55), (\"chitin,\", 56), (\"and\", 57), (\"comprised\", 58), (\"of\", 59), (\"arbitrarily\", 60), (\"distributed\", 61), (\"β-(1-4)-linked\", 62), (\"d-glucosamine\", 63), (\"(deacetylated\", 64), (\"unit)\", 65), (\"and\", 66), (\"N-acetyl-d-glucosamine\", 67), (\"(acetylated\", 68), (\"unit)\", 69), (\"that\", 70), (\"exhibits\", 71), (\"magnificent\", 72), (\"characteristics,\", 73), (\"including\", 74), (\"being\", 75), (\"mucoadhesive,\", 76), (\"biodegradable,\", 77), (\"and\", 78), (\"biocompatible,\", 79), (\"has\", 80), (\"emerged\", 81), (\"as\", 82), (\"an\", 83), (\"essential\", 84), (\"element\", 85), (\"for\", 86), (\"the\", 87), (\"development\", 88), (\"of\", 89), (\"a\", 90), (\"nano-particulate\", 91), (\"delivery\", 92), (\"vehicle.\", 93), (\"Additionally,\", 94), (\"the\", 95), (\"flexibility\", 96), (\"of\", 97), (\"CS\", 98), (\"structure\", 99), (\"due\", 100), (\"to\", 101), (\"the\", 102), (\"free\", 103), (\"protonable\", 104), (\"amino\", 105), (\"groups\", 106), (\"in\", 107), (\"the\", 108), (\"CS\", 109), (\"backbone\", 110), (\"has\", 111), (\"made\", 112), (\"it\", 113), (\"easy\", 114), (\"for\", 115), (\"the\", 116), (\"modification\", 117), (\"and\", 118), (\"functionalization\", 119), (\"of\", 120), (\"CS\", 121), (\"to\", 122), (\"be\", 123), (\"developed\", 124), (\"into\", 125), (\"a\", 126), (\"nanoparticle\", 127), (\"system\", 128), (\"with\", 129), (\"high\", 130), (\"adaptability\", 131), (\"in\", 132), (\"lung\", 133), (\"cancer\", 134), (\"treatment.\", 135), (\"In\", 136), (\"this\", 137), (\"review,\", 138), (\"the\", 139), (\"current\", 140), (\"state\", 141), (\"of\", 142), (\"chitosan\", 143), (\"nanoparticle\", 144), (\"(CNP)\", 145), (\"systems,\", 146), (\"including\", 147), (\"the\", 148), (\"advantages,\", 149), (\"challenges,\", 150), (\"and\", 151), (\"opportunities,\", 152), (\"will\", 153), (\"be\", 154), (\"discussed,\", 155), (\"followed\", 156), (\"by\", 157), (\"drug\", 158), (\"release\", 159), (\"mechanisms\", 160), (\"and\", 161), (\"mathematical\", 162), (\"kinetic\", 163), (\"models.\", 164), (\"Subsequently,\", 165), (\"various\", 166), (\"modification\", 167), (\"routes\", 168), (\"of\", 169), (\"CNP\", 170), (\"for\", 171), (\"improved\", 172), (\"and\", 173), (\"enhanced\", 174), (\"therapeutic\", 175), (\"efficacy,\", 176), (\"as\", 177), (\"well\", 178), (\"as\", 179), (\"other\", 180), (\"restrictions\", 181), (\"of\", 182), (\"conventional\", 183), (\"drug\", 184), (\"administration\", 185), (\"for\", 186), (\"lung\", 187), (\"cancer\", 188), (\"treatment,\", 189), (\"are\", 190), (\"covered.\", 191)"
+    },
+    {
+      "doc_id": "327",
+      "annotations": [
+        {
+          "Expression": "circRNAs",
+          "StartToken": 60,
+          "EndToken": 60,
+          "RefersTo": "circular RNAs"
+        },
+        {
+          "Expression": "circRNAs",
+          "StartToken": 77,
+          "EndToken": 77,
+          "RefersTo": "circular RNAs"
+        },
+        {
+          "Expression": "circRNAs",
+          "StartToken": 96,
+          "EndToken": 96,
+          "RefersTo": "circular RNAs"
+        },
+        {
+          "Expression": "we",
+          "StartToken": 113,
+          "EndToken": 113,
+          "RefersTo": "authors"
+        },
+        {
+          "Expression": "circRNAs",
+          "StartToken": 121,
+          "EndToken": 121,
+          "RefersTo": "circular RNAs"
+        }
+      ],
+      "new_text": "(\"Lung\", 0), (\"cancer\", 1), (\"is\", 2), (\"one\", 3), (\"of\", 4), (\"the\", 5), (\"high\", 6), (\"malignancy-related\", 7), (\"incidence\", 8), (\"and\", 9), (\"mortality\", 10), (\"worldwide,\", 11), (\"accounting\", 12), (\"for\", 13), (\"about\", 14), (\"13%\", 15), (\"of\", 16), (\"total\", 17), (\"cancer\", 18), (\"diagnoses.\", 19), (\"Currently,\", 20), (\"the\", 21), (\"use\", 22), (\"of\", 23), (\"anti-cancer\", 24), (\"agents\", 25), (\"is\", 26), (\"still\", 27), (\"the\", 28), (\"main\", 29), (\"therapeutic\", 30), (\"method\", 31), (\"for\", 32), (\"lung\", 33), (\"cancer.\", 34), (\"However,\", 35), (\"cancer\", 36), (\"cells\", 37), (\"will\", 38), (\"gradually\", 39), (\"show\", 40), (\"resistance\", 41), (\"to\", 42), (\"these\", 43), (\"drugs\", 44), (\"with\", 45), (\"the\", 46), (\"progress\", 47), (\"of\", 48), (\"treatment.\", 49), (\"And\", 50), (\"the\", 51), (\"molecular\", 52), (\"mechanisms\", 53), (\"underlying\", 54), (\"chemotherapy\", 55), (\"agents\", 56), (\"resistance\", 57), (\"remain\", 58), (\"unclear.\", 59), (\"circRNAs\", 60), (\"are\", 61), (\"newly\", 62), (\"identified\", 63), (\"noncoding\", 64), (\"RNAs\", 65), (\"molecules\", 66), (\"with\", 67), (\"covalently\", 68), (\"closed\", 69), (\"circular\", 70), (\"structures.\", 71), (\"Previous\", 72), (\"studies\", 73), (\"have\", 74), (\"shown\", 75), (\"that\", 76), (\"circRNAs\", 77), (\"are\", 78), (\"associated\", 79), (\"with\", 80), (\"tumorigenesis\", 81), (\"and\", 82), (\"progression\", 83), (\"of\", 84), (\"various\", 85), (\"cancers,\", 86), (\"including\", 87), (\"lung\", 88), (\"cancer.\", 89), (\"Recently,\", 90), (\"growing\", 91), (\"reports\", 92), (\"have\", 93), (\"suggested\", 94), (\"that\", 95), (\"circRNAs\", 96), (\"could\", 97), (\"contribute\", 98), (\"to\", 99), (\"drug\", 100), (\"resistance\", 101), (\"of\", 102), (\"lung\", 103), (\"cancer\", 104), (\"cell\", 105), (\"through\", 106), (\"different\", 107), (\"mechanisms.\", 108), (\"Therefore,\", 109), (\"in\", 110), (\"this\", 111), (\"review,\", 112), (\"we\", 113), (\"summarized\", 114), (\"the\", 115), (\"functions\", 116), (\"and\", 117), (\"underlying\", 118), (\"mechanisms\", 119), (\"of\", 120), (\"circRNAs\", 121), (\"in\", 122), (\"regulating\", 123), (\"chemoresistance\", 124), (\"of\", 125), (\"lung\", 126), (\"cancer\", 127), (\"and\", 128), (\"discussed\", 129), (\"their\", 130), (\"potential\", 131), (\"applications\", 132), (\"for\", 133), (\"diagnosis,\", 134), (\"prognosis,\", 135), (\"and\", 136), (\"treatment\", 137), (\"of\", 138), (\"lung\", 139), (\"cancer.\", 140)"
+    },
+    {
+      "doc_id": "394",
+      "annotations": [
+        {
+          "Expression": "CD-NS",
+          "StartToken": 28,
+          "EndToken": 28,
+          "RefersTo": "cyclodextrin based nanosponge"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 47,
+          "EndToken": 35,
+          "RefersTo": "quercitrin (QCT)'s"
+        },
+        {
+          "Expression": "BCD",
+          "StartToken": 75,
+          "EndToken": 75,
+          "RefersTo": "B cyclodextrin"
+        },
+        {
+          "Expression": "2-HPBCD",
+          "StartToken": 78,
+          "EndToken": 78,
+          "RefersTo": "2-hydroxy propyl-ß-cyclodextrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 91,
+          "EndToken": 91,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "CD-NS",
+          "StartToken": 93,
+          "EndToken": 93,
+          "RefersTo": "cyclodextrin based nanosponge"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 109,
+          "EndToken": 109,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 120,
+          "EndToken": 120,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 160,
+          "EndToken": 160,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "CD-NS",
+          "StartToken": 162,
+          "EndToken": 162,
+          "RefersTo": "cyclodextrin based nanosponge"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 166,
+          "EndToken": 166,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 185,
+          "EndToken": 185,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "CD-NS",
+          "StartToken": 199,
+          "EndToken": 189,
+          "RefersTo": "cyclodextrin based nanosponge"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 194,
+          "EndToken": 194,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 196,
+          "EndToken": 196,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "CD-NS",
+          "StartToken": 198,
+          "EndToken": 198,
+          "RefersTo": "cyclodextrin based nanosponge"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 220,
+          "EndToken": 220,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 220,
+          "EndToken": 220,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 235,
+          "EndToken": 235,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "CD-NS",
+          "StartToken": 244,
+          "EndToken": 244,
+          "RefersTo": "cyclodextrin based nanosponge"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 244,
+          "EndToken": 244,
+          "RefersTo": "quercitrin"
+        },
+        {
+          "Expression": "QCT",
+          "StartToken": 258,
+          "EndToken": 258,
+          "RefersTo": "quercitrin"
+        }
+      ],
+      "new_text": "(\"Lung\", 0), (\"cancer\", 1), (\"and\", 2), (\"pandemic\", 3), (\"acute\", 4), (\"respiratory\", 5), (\"disease,\", 6), (\"COVID-19,\", 7), (\"are\", 8), (\"examples\", 9), (\"of\", 10), (\"the\", 11), (\"most\", 12), (\"worldwide\", 13), (\"widespread\", 14), (\"diseases.\", 15), (\"The\", 16), (\"aim\", 17), (\"of\", 18), (\"the\", 19), (\"current\", 20), (\"study\", 21), (\"is\", 22), (\"to\", 23), (\"develop\", 24), (\"cyclodextrin\", 25), (\"based\", 26), (\"nanosponge\", 27), (\"(CD-NS)\", 28), (\"for\", 29), (\"loading\", 30), (\"the\", 31), (\"flavonoid\", 32), (\"drug,\", 33), (\"quercitrin\", 34), (\"(QCT).\", 35), (\"This\", 36), (\"is\", 37), (\"to\", 38), (\"improve\", 39), (\"its\", 40), (\"solubility\", 41), (\"in\", 42), (\"an\", 43), (\"attempt\", 44), (\"to\", 45), (\"enhance\", 46), (\"its\", 47), (\"activity\", 48), (\"against\", 49), (\"lung\", 50), (\"cancer\", 51), (\"as\", 52), (\"well\", 53), (\"as\", 54), (\"SARS-CoV-2\", 55), (\"virus\", 56), (\"responsible\", 57), (\"for\", 58), (\"COVID-19.\", 59), (\"Preparation\", 60), (\"of\", 61), (\"CD-NS\", 62), (\"was\", 63), (\"performed\", 64), (\"by\", 65), (\"ultrasound-assisted\", 66), (\"synthesis\", 67), (\"method.\", 68), (\"Two\", 69), (\"CDs\", 70), (\"were\", 71), (\"employed,\", 72), (\"namely,\", 73), (\"β\", 74), (\"cyclodextrin\", 75), (\"(βCD)\", 76), (\"and\", 77), (\"2-hydroxy\", 78), (\"propyl-β-cyclodextrin\", 79), (\"(2-HPβCD)\", 80), (\"that\", 81), (\"were\", 82), (\"crosslinked\", 83), (\"with\", 84), (\"diphenyl\", 85), (\"carbonate,\", 86), (\"one\", 87), (\"at\", 88), (\"a\", 89), (\"time.\", 90), (\"QCT\", 91), (\"loaded\", 92), (\"CD-NS\", 93), (\"revealed\", 94), (\"entrapment\", 95), (\"efficiency\", 96), (\"and\", 97), (\"particle\", 98), (\"size\", 99), (\"ranged\", 100), (\"between\", 101), (\"94.17\", 102), (\"and\", 103), (\"99.03%\", 104), (\"and\", 105), (\"97.10-325.90\", 106), (\"nm,\", 107), (\"respectively.\", 108), (\"QCT\", 109), (\"loaded\", 110), (\"2-HPβCD-NS\", 111), (\"revealed\", 112), (\"smaller\", 113), (\"particle\", 114), (\"size\", 115), (\"compared\", 116), (\"with\", 117), (\"that\", 118), (\"of\", 119), (\"QCT\", 120), (\"loaded\", 121), (\"βCD-NS.\", 122), (\"Zeta\", 123), (\"potential\", 124), (\"absolute\", 125), (\"values\", 126), (\"of\", 127), (\"the\", 128), (\"prepared\", 129), (\"formulations\", 130), (\"were\", 131), (\">20\", 132), (\"mV,\", 133), (\"indicating\", 134), (\"physically\", 135), (\"stable\", 136), (\"nanosystems.\", 137), (\"The\", 138), (\"selected\", 139), (\"formulations\", 140), (\"were\", 141), (\"investigated\", 142), (\"by\", 143), (\"Fourier\", 144), (\"transform\", 145), (\"infrared\", 146), (\"spectroscopy,\", 147), (\"X-ray\", 148), (\"powder\", 149), (\"diffraction\", 150), (\"and\", 151), (\"scanning\", 152), (\"electron\", 153), (\"microscopy\", 154), (\"which\", 155), (\"proved\", 156), (\"the\", 157), (\"formation\", 158), (\"of\", 159), (\"QCT\", 160), (\"loaded\", 161), (\"CD-NS\", 162), (\"exhibiting\", 163), (\"porous\", 164), (\"structure.\", 165), (\"QCT\", 166), (\"exhibited\", 167), (\"partial\", 168), (\"and\", 169), (\"complete\", 170), (\"amorphization\", 171), (\"in\", 172), (\"βCD-NS\", 173), (\"and\", 174), (\"2-HPβCD-NS,\", 175), (\"respectively.\", 176), (\"In\", 177), (\"vitro\", 178), (\"release\", 179), (\"revealed\", 180), (\"an\", 181), (\"improved\", 182), (\"release\", 183), (\"of\", 184), (\"QCT\", 185), (\"from\", 186), (\"CD-NS\", 187), (\"formulations.\", 188), (\"The\", 189), (\"biological\", 190), (\"activity\", 191), (\"of\", 192), (\"free\", 193), (\"QCT\", 194), (\"and\", 195), (\"QCT\", 196), (\"loaded\", 197), (\"CD-NS\", 198), (\"was\", 199), (\"investigated\", 200), (\"against\", 201), (\"lung\", 202), (\"cancer\", 203), (\"cell\", 204), (\"line\", 205), (\"A549\", 206), (\"as\", 207), (\"well\", 208), (\"as\", 209), (\"SARS-CoV-2\", 210), (\"virus.\", 211), (\"The\", 212), (\"results\", 213), (\"revealed\", 214), (\"that\", 215), (\"IC(50)\", 216), (\"values\", 217), (\"of\", 218), (\"free\", 219), (\"QCT\", 220), (\"against\", 221), (\"lung\", 222), (\"cancer\", 223), (\"cell\", 224), (\"line\", 225), (\"A549\", 226), (\"and\", 227), (\"SARS-CoV-2\", 228), (\"were\", 229), (\"higher\", 230), (\"than\", 231), (\"those\", 232), (\"exhibited\", 233), (\"by\", 234), (\"QCT\", 235), (\"loaded\", 236), (\"CD-NS\", 237), (\"by\", 238), (\"1.57-5.35\", 239), (\"and\", 240), (\"5.95-26.95\", 241), (\"folds,\", 242), (\"respectively.\", 243), (\"QCT\", 244), (\"loaded\", 245), (\"2-HPβCD-NS\", 246), (\"revealed\", 247), (\"enhanced\", 248), (\"in\", 249), (\"vitro\", 250), (\"release\", 251), (\"and\", 252), (\"superior\", 253), (\"biological\", 254), (\"activity\", 255), (\"compared\", 256), (\"with\", 257), (\"QCT\", 258), (\"loaded\", 259), (\"βCD-NS.\", 260)"
+    }
+  ]
+}
