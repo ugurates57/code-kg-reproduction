@@ -41,6 +41,7 @@ def read_abstracts(args) -> pd.DataFrame:
     return pd.DataFrame([{"doc_id": "doc_0", "abstract": text}])
 
 def main():
+    # Read arguments from command line
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_csv", type=str, default=None, help="CSV containing abstracts")
     parser.add_argument("--text_col", type=str, default="abstract", help="Column containing abstract text")
@@ -72,7 +73,10 @@ def main():
     trace_path = output_path.with_suffix(".trace.jsonl")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Read abstracts from CSV
     df_abs = read_abstracts(args)
+
     if df_abs['doc_id'].duplicated().any():
         raise ValueError('Duplicate document IDs in input')
     paths = ([trace_path] if trace_path.exists() else []) + args.import_trace
@@ -86,9 +90,13 @@ def main():
         return
     if args.bypass_cache:
         os.environ['LLM_CACHE_BYPASS'] = '1'
+
+    # Initialize LLMs
     mixtral_llm = LLM(MIXTRAL)
     llama8_llm = LLM(LLAMA_31_8B)
     llama70_llm = LLM(LLAMA_33_70B)
+
+    # Check for configuration conflicts
     run_configuration = configuration(args)
     for key, record in completed.items():
         metadata = record.get('resume_configuration')
@@ -101,6 +109,7 @@ def main():
         if key not in existing:
             append_record(trace_path, record)
     set_seed(args.seed)
+
     # BERT classifier (train once if needed)
     bert_cfg = BertClassifierConfig(
         out_dir=args.bert_out_dir,
@@ -124,6 +133,7 @@ def main():
 
     succeeded = failed = skipped = 0
 
+    # Process each abstract
     for _, row in df_abs.iterrows():
         doc_id = row["doc_id"]
         abstract = row["abstract"]
@@ -145,37 +155,36 @@ def main():
                 return_full_text=False,
             )[0][0]['generated_text'].strip()
 
+            # LLM returns something like: {
+            #    "Expression": "She",
+            #    "StartToken": 4,
+            #    "EndToken": 4,
+            #    "RefersTo": "Anna"
+            #    }
+
+            # read the coref output into a structured format
             corefs = parse_coref_output(coref_out)
 
             # 3) Switch coref into text (PBC -> Primary biliary cirrhosis at indices)
             switched = apply_coref_switch(tokenized_text, corefs)
 
-            print(f"\n[DOC {doc_id}] ==============================")
-            print(f"[DOC {doc_id}] Abstract chars: {len(abstract)}")
-
-            print(f"[DOC {doc_id}] Tokens: {len(pairs)}")
-            print(f"[DOC {doc_id}] Coref spans: {len(corefs)}")
-
-            print(f"[DOC {doc_id}] Switched snippet: {switched[:200]}...")
-
-
-
-            # 4) Sentence split
+            # 4) Sentence split (NLTK)
             sentences = split_sentences(switched)
 
-            print(f"[DOC {doc_id}] Sentences: {len(sentences)}")
-            if len(sentences) > 0:
-                print(f"[DOC {doc_id}] Sentence[0]: {sentences[0]}")
-
-
-            # 5) BERT classify
+            # 5) Use BERT to classify sentences into Simple, Compound, Complex, Compound-Complex or Incomplete.
+            # Locally trained model is used, up to 4 sentences per batch for efficiency.
             preds = bert.predict_batch(sentences, batch_size=4)
             cls_df = pd.DataFrame(preds)
             print("\nSentence classification:")
             print(cls_df.to_string(index=False))
 
-        
+            # classifier returns something like this: {
+            #    "sentence": "Anna is a researcher.",
+            #    "predicted_label": "Simple Sentence",
+            #    "confidence": 0.97
+            # }
 
+            # sort sentences into lists by predicted label for simplification
             simple_sents = cls_df[cls_df["predicted_label"] == "Simple Sentence"]["sentence"].tolist()
             compound_sents = cls_df[cls_df["predicted_label"] == "Compound Sentence"]["sentence"].tolist()
             complex_sents = cls_df[cls_df["predicted_label"] == "Complex Sentence"]["sentence"].tolist()
@@ -187,12 +196,12 @@ def main():
             f"Complex={len(complex_sents)} | "
             f"Compound-Complex={len(cc_sents)}")
 
-            if len(sentences) > 0 and (len(simple_sents)+len(compound_sents)+len(complex_sents)+len(cc_sents)) != len(sentences):
-              print(f"[DOC {doc_id}] ⚠️ WARNING: label split count != total sentences")
-
             # 6) Simplify (route to correct LLM)
             stage = "simplification"
             simplified_rows = []
+            # Choose the appropriate LLM for each sentence type and simplify in batches
+            # In my reproduction: only prompts differ, same Mixtral model is used for all sentence types
+            # Simple sentences skip this step
             if compound_sents:
                 simplified_rows += simplify_sentences_for_class(llama8_llm, "Compound Sentence", compound_sents, args.batch_size)
             if complex_sents:
@@ -201,12 +210,12 @@ def main():
                 simplified_rows += simplify_sentences_for_class(mixtral_llm, "Compound-Complex Sentence", cc_sents, args.batch_size)
 
             converted_simple = []
+            # Combine the simplified sentences with the original simple sentences for relationship extraction
             for r in simplified_rows:
                 converted_simple.extend(r.get("simplified_sentences") or [])
-
             final_simple_sentences = simple_sents + converted_simple
 
-            print(f"[DOC {doc_id}] Simplify input counts → "
+            print(f"[DOC {doc_id}] Simplify input counts: "
             f"Compound={len(compound_sents)} | "
             f"Complex={len(complex_sents)} | "
             f"Compound-Complex={len(cc_sents)}")
@@ -217,8 +226,9 @@ def main():
 
             # 7) Relationship extraction with Mixtral
             stage = "relation_extraction"
+            # Build extraction prompt for every simple sentence and run in batches. The LLM returns a JSON-like string for each sentence.
             rel_rows = extract_relationships(mixtral_llm, final_simple_sentences, batch_size=args.batch_size)
-                    # Save intermediate results for later inspection.
+            # Save intermediate results for later inspection.
             trace = {
                 "doc_id": str(doc_id),
                 "original_text": abstract,
@@ -258,6 +268,8 @@ def main():
                 'message': str(exc),
             })
             print(f'[DOC {doc_id}] {stage}: {exc}; continuing', flush=True)
+            
+    # Write the final CSV with all completed records
     reconstruct_csv(completed, output_path)
     print(f'Completed={succeeded} failed={failed} skipped={skipped}; CSV: {output_path}')
 

@@ -15,3 +15,5 @@ __pycache__/
 *.pyc
 /models/
 /outputs/
+
+/CoDe-KG_Speaker_Notes.md
