@@ -17,7 +17,7 @@ The API adapter supports caching, bounded retries, and response checks. Requests
 - BERT test accuracy: **88.72%**
 - BERT test macro-F1: **87.60%**
 - Test set: **5,223 sentences**
-- Two complete pipeline traces are available from the five-document sample.
+- Four of five selected abstracts completed the full pipeline across retained attempts, yielding 184 triple rows and 150 distinct within-document triples.
 - Historical configuration gaps are documented in the repository.
 - These results are a partial reproduction, not a full validation of the paper's reported performance.
 
