@@ -49,7 +49,16 @@ def set_seed(seed=4000):
         torch.cuda.manual_seed_all(seed)
     # Local seeds do not guarantee reproducible API responses.
 
-
+# Reproduction adaptation:
+# Replace local model execution with university gateway API requests,
+# while preserving the generate_batch interface used by the pipeline.
+# All original model roles use the model configured by LLM_MODEL.
+#
+# Added request-level caching, bounded retries and response checks
+# to support interrupted runs and reject truncated or empty answers.
+# Requests are processed sequentially; batch_size does not add parallelism.
+# top_k and repetition_penalty remain accepted but are not transmitted.
+# These checks improve execution reliability, not factual correctness.
 class LLM:
     def __init__(self, model_name):
         load_dotenv(Path(__file__).resolve().parent.parent / '.env')

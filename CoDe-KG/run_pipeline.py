@@ -147,7 +147,7 @@ def main():
             pairs = tokens_with_indices(abstract, keep_punct=True)
             tokenized_text = format_pairs(pairs)
 
-            # 2) Coref with Mixtral
+            # 2) Resolve references using the configured API model.
             coref_prompt = build_coref_prompt(tokenized_text)
             coref_out = mixtral_llm.generate_batch(
                 prompts=[coref_prompt], max_new_tokens=1024, batch_size=1,
@@ -200,7 +200,8 @@ def main():
             stage = "simplification"
             simplified_rows = []
             # Choose the appropriate LLM for each sentence type and simplify in batches
-            # In my reproduction: only prompts differ, same Mixtral model is used for all sentence types
+            # All roles use the API model configured by LLM_MODEL.
+            # Sentence classes retain their own prompts and generation settings.
             # Simple sentences skip this step
             if compound_sents:
                 simplified_rows += simplify_sentences_for_class(llama8_llm, "Compound Sentence", compound_sents, args.batch_size)
@@ -224,7 +225,7 @@ def main():
 
 
 
-            # 7) Relationship extraction with Mixtral
+            # 7) Extract relationships using the configured API model.
             stage = "relation_extraction"
             # Build extraction prompt for every simple sentence and run in batches. The LLM returns a JSON-like string for each sentence.
             rel_rows = extract_relationships(mixtral_llm, final_simple_sentences, batch_size=args.batch_size)

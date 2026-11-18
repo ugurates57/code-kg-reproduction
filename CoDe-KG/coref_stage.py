@@ -4,6 +4,8 @@ from typing import Dict, List, Tuple, Any
 from tokenize_paper import parse_tokenized_pairs
 from prompts import build_prompt, COREf_FICL_SYSTEM, COREf_FICL_USER
 
+# Parse the LLM response into structured replacement proposals.
+# This checks whether the required fields can be extracted,
 def _extract_coref_blocks(raw: str) -> List[Dict[str, Any]]:
     """
     Regex-first extraction for blocks that contain:
@@ -45,6 +47,8 @@ def _extract_coref_blocks(raw: str) -> List[Dict[str, Any]]:
 
     return blocks
 
+# Insert the indexed abstract into the existing coreference prompt.
+# The API request is made by the caller through llm_runtime.py.
 def build_coref_prompt(tokenized_text: str) -> str:
     return build_prompt(COREf_FICL_SYSTEM, COREf_FICL_USER, tokenized_text=tokenized_text)
 
@@ -58,6 +62,10 @@ def apply_coref_switch(tokenized_text: str, corefs: List[Dict[str, Any]]) -> str
     # replacements: token_idx -> string or None (drop)
     replacements: Dict[int, str | None] = {}
 
+
+    # Apply the model-provided spans directly, using inclusive end indices.
+    # No check verifies that Expression matches the selected source tokens.
+    # Incorrect positions can overwrite unrelated words.
     for c in corefs_sorted:
         start_token = int(c["StartToken"])
         end_token = int(c["EndToken"])
@@ -80,7 +88,8 @@ def apply_coref_switch(tokenized_text: str, corefs: List[Dict[str, Any]]) -> str
 
     text = " ".join(result_tokens)
 
-    # punctuation cleanup similar to yours
+    # Normalize whitespace around punctuation.
+    # This does not restore punctuation lost during span replacement. 
     text = re.sub(r"\s+([.,;:!?])", r"\1", text)
     text = re.sub(r"\(\s+", "(", text)
     text = re.sub(r"\s+\)", ")", text)

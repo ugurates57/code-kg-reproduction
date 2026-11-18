@@ -8,6 +8,7 @@ from prompts import (
     SIMPLIFY_COMPOUND_COMPLEX_SYSTEM, SIMPLIFY_COMPOUND_COMPLEX_USER,
 )
 
+
 def extract_simplified_sentences(raw: str) -> List[str]:
     sents = []
     for line in raw.splitlines():
@@ -29,7 +30,7 @@ def extract_simplified_sentences(raw: str) -> List[str]:
                 sents.append(sent)
     return sents
 
-
+# Build a sentence-type-specific prompt and request simplified sentences.
 def simplify_sentences_for_class(llm, sentence_type: str, sentences: List[str], batch_size: int) -> List[Dict[str, Any]]:
     rows = []
     if not sentences:
@@ -61,7 +62,9 @@ def simplify_sentences_for_class(llm, sentence_type: str, sentences: List[str], 
         do_sample=True,
         return_full_text=False,
     )
-
+    
+    # Parse simplified sentences from the model response.
+    # Parsing does not validate factual correctness or remove duplicates.
     for orig, out in zip(sentences, outs):
         raw = out[0]["generated_text"].strip()
         simplified = extract_simplified_sentences(raw)

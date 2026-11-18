@@ -67,7 +67,8 @@ class CSVDataset(torch.utils.data.Dataset):
         enc["labels"] = self.label_map[label_str]
         return enc
 
-
+# Load our fine-tuned BERT classifier and predict sentence types locally.
+# Training is handled separately by scripts/train_bert.py.
 class BertSentenceClassifier:
     def __init__(self, cfg: BertClassifierConfig):
         self.cfg = cfg
@@ -82,6 +83,7 @@ class BertSentenceClassifier:
             )
         )
 
+    # Use eager attention for compatibility with our Apple MPS setup.
     def load(self) -> None:
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.cfg.out_dir,
@@ -113,6 +115,7 @@ class BertSentenceClassifier:
             "the correct model directory."
         )
 
+    # Disable gradient tracking because this method only performs inference.
     @torch.inference_mode()
     def predict_batch(
         self,
@@ -133,6 +136,7 @@ class BertSentenceClassifier:
         if batch_size < 1:
             raise ValueError("batch_size must be at least 1.")
 
+        # Prefer CUDA, then Apple MPS, otherwise use the CPU.
         if torch.cuda.is_available():
             device = torch.device("cuda")
         elif torch.backends.mps.is_available():
@@ -151,6 +155,8 @@ class BertSentenceClassifier:
         for i in range(0, len(sentences), batch_size):
             batch = sentences[i:i + batch_size]
 
+            # Convert text into token IDs and attention masks.
+            # Pad within each batch and truncate inputs beyond the configured limit.
             enc = self.tokenizer(
                 batch,
                 return_tensors="pt",
@@ -172,6 +178,7 @@ class BertSentenceClassifier:
             for sentence, prediction, confidence in zip(
                 batch, predictions, confidences
             ):
+                # Map the predicted class ID to its saved label name.
                 out.append({
                     "sentence": sentence,
                     "predicted_label": self.model.config.id2label[
